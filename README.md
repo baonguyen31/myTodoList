@@ -178,7 +178,7 @@ source venv/bin/activate
 # Nếu chạy trong terminal của VsCode lỗi thì hay chạy lệnh này thử trước khi active:
  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 # Tải thư viện trong venv
-pip install -r requirementsphobert_.txt
+pip install -r requirements_phobert.txt
 #Chạy sever
 uvicorn main_v2:app --reload --port 8000                        
 ```
