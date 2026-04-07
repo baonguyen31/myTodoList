@@ -1,0 +1,11 @@
+torch
+transformers
+underthesea
+datasets
+seqeval
+pandas
+jupyter
+fastapi
+uvicorn
+dateparser
+pyvi

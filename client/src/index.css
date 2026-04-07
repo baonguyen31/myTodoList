@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+[data-theme='dark'] {
+  --main-background-color: #151b2b;
+  --item-background-color: #212633;
+  --hover-color: #003a8c;
+  --row-hover-color: rgb(42, 55, 83);
+  --primary-blue-color: #1677ff;
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #c2c6d6;
+  --completed-item-color: #00ffaa;
+  --overdue-item-color: #ff6161;
+  --in-progress-item-color: #f5e90b;
+  --divider-color: #4f5e76;
+  --input-background-color: #393c47;
+  --input-placeholder-color: #c2c6d6;
+  --active-background-color: #4c5f88;
+  --active-menu-button-color: #4c5f88;
+  --table-header-background-color: #323b4c;
+  --empty-table-background-color: #212633;
+  --priority-text-color: #ffffff;
+  --theme-button-color: #ffffff;
+}
+
+[data-theme='light'] {
+  --main-background-color: #f8fafc;
+  --item-background-color: #ffffff;
+  --hover-color: #1677ff;
+  --row-hover-color: #f0f0f0;
+  --primary-blue-color: #003a8c;
+  --primary-text-color: black;
+  --secondary-text-color: #666;
+  --completed-item-color: green;
+  --overdue-item-color: red;
+  --in-progress-item-color: #f5e90b;
+  --divider-color: #e6e6e6;
+  --input-background-color: #ffffff;
+  --input-placeholder-color: #adadad;
+  --active-background-color: #003a8c;
+  --active-menu-button-color: #dfe1e4;
+  --table-header-background-color: #dddddd;
+  --empty-table-background-color: #ffffff;
+  --priority-text-color: #003a8c;
+  --theme-button-color: #ffb700;
+}

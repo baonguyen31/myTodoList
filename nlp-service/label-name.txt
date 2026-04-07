@@ -1,0 +1,8 @@
+Nhãn            Ý nghĩa                              Ví dụ
+B-TASK          Từ đầu tiên của task                "Họp"
+I-TASK          Từ tiếp theo trong task             "với sếp"
+B-TIME          Từ đầu tiên của giờ                 "3 giờ"
+I-TIME          Từ tiếp theo trong giờ              "3 giờ chiều"
+B-DATE          Từ đầu tiên của ngày                "ngày mai"
+I-DATE          Từ tiếp theo trong ngày             "ngày mai"
+O               Không phải entity nào               "lúc", "với", "và"

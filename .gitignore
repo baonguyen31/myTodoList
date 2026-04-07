@@ -1,0 +1,74 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build artifacts (if any at root level)
+dist/
+build/
+target/
+
+# Node.js (if any at root level)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java/Gradle (if any at root level)
+.gradle/
+bin/
+.classpath
+.project
+.settings/
+
+# Quarkus
+.quarkus/
+.certs/
+
+# Database files (if any)
+*.db
+*.sqlite
+*.sqlite3
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Miscellaneous
+*.orig
+*.rej
+.factorypath
+/nlp-service/venv
+/nlp-service/model/vocab.txt
+/nlp-service/model/added_tokens.json
+/nlp-service/model/bpe.codes
+/nlp-service/model/config.json
+/nlp-service/model/model.safetensors
+/nlp-service/model/tokenizer_config.json
+/phobert-ner-best.zip

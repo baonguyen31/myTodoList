@@ -1,0 +1,16 @@
+# test nhanh trong Python
+from auto_label import auto_label
+
+tests = [
+    "Họp với sếp lúc 6 giờ sáng ngày mai",
+    "Gặp đối tác 8h chiều ngày mai",
+    "Gửi báo cáo cho bạn bè 10 giờ sáng thứ sáu",
+    "Họp với team vào lúc 9 giờ thứ năm",
+]
+
+for t in tests:
+    result = auto_label(t)
+    if result:
+        for tok, lab in zip(result["tokens"], result["labels"]):
+            print(f"{tok:20} {lab}")
+    print("---")
