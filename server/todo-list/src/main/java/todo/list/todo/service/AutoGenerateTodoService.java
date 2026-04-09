@@ -65,7 +65,7 @@ public class AutoGenerateTodoService {
                     priorityEnum, StatusEnum.PENDING);
 
             //Luu task
-            todoService.saveTodo(todo);
+            todoService.saveTodo(todo); 
 
 
             rs.add(todoSupportService.mapTodoResponse(todo));

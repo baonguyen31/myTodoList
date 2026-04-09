@@ -40,6 +40,12 @@ public class Todo extends PanacheEntity {
     @Column
     public Instant updatedAt;
 
+    @Column(name = "ai_generated", nullable = false)
+    public boolean aiGenerated = false;
+
+    @Column(name = "source", length = 64)
+    public String source;
+
     public boolean isOverdue() {
         return dueDate != null && dueDate.isBefore(Instant.now()) && !completed;
     }

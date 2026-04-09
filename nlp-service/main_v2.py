@@ -5,6 +5,8 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification
 from datetime import datetime, timedelta
 import torch
 import re
+from chatbot.chat_router import router as chat_router, init_router
+
 
 # import toàn bộ hàm rule-based từ main cũ làm fallback
 from main import (
@@ -18,7 +20,7 @@ from main import (
 app = FastAPI()
 
 # ── Load PhoBERT ───────────────────────────────────────────────────────────────
-MODEL_PATH = "./model"
+MODEL_PATH = "./model/model_v1"  # Đường dẫn đến model PhoBERT đã fine-tune của bạn
 LABELS     = ["O","B-TASK","I-TASK","B-TIME","I-TIME","B-DATE","I-DATE"]
 id2label   = {i: l for i, l in enumerate(LABELS)}
 
@@ -28,6 +30,10 @@ ner_model     = AutoModelForTokenClassification.from_pretrained(MODEL_PATH)
 ner_model.eval()
 PHOBERT_READY = True
 print("PhoBERT ready!")
+
+# Sau khi load PhoBERT xong:
+init_router(ner_model, ner_tokenizer, id2label)
+app.include_router(chat_router)
 
 # ── Schemas ───────────────────────────────────────────────────────────────────
 class PromptRequest(BaseModel):
@@ -156,3 +162,5 @@ def extract_tasks(request: PromptRequest):
         print(f"[Result] title='{title}' dueDate='{due_date}'\n")
 
     return tasks
+
+

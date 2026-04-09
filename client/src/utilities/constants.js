@@ -12,6 +12,7 @@ export const API_ENDPOINTS = Object.freeze({
   TODOS_AUTO_GENERATE: '/todos/auto-generate',
   GOOGLE_LOGIN: '/auth/google',
   FACEBOOK_LOGIN: '/auth/facebook',
+  CHAT: '/todos/chat',
 });
 
 export const PAGE_PATH = Object.freeze({

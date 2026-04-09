@@ -106,58 +106,92 @@ export const TodoListPage = () => {
 
 
   const handleActionMenuOpenChange = (rowId, isOpen) => setOpenActionRowId(isOpen ? rowId : null);
-
-  const handleSendPrompt = async () => {
+const handleSendPrompt = async () => {
     const promptText = promptInput.trim();
+    if (!promptText) return;
 
-    if (!promptText) {
-      message.error('Please enter a prompt before sending.', 1);
-      return;
-    }
-
+    setChatMessages(prev => [...prev, {
+        id: Date.now() + '-user', from: 'user', text: promptText
+    }]);
+    setPromptInput('');
     setIsChatSubmitting(true);
 
-    setChatMessages(prev => [...prev, { id: Date.now() + '-user', from: 'user', text: promptText }]);
-
     try {
-      const newTasks = await generateTasks({
-        source: 'user_prompt',
-        prompt: promptText,
-        maxTasks: 5, // Default max tasks for chat
-      });
+        const { data } = await todoApi.post(
+            API_ENDPOINTS.CHAT,   // '/todos/chat'
+            { prompt: promptText }
+        );
 
-      if (newTasks && newTasks.length > 0) {
-        setChatMessages(prev => [
-          ...prev,
-          { id: Date.now() + '-ai', from: 'ai', text: `${newTasks.length} task(s) generated and saved successfully.` },
-        ]);
-        setPromptInput('');
-        setIsChatOpen(true);
+        setChatMessages(prev => [...prev, {
+            id: Date.now() + '-ai', from: 'ai', text: data.message
+        }]);
 
-        handleAddGeneratedTodos(newTasks);
-        message.success(`${newTasks.length} AI task(s) created successfully!`, 1);
-      } else {
-        setChatMessages(prev => [
-          ...prev,
-          { id: Date.now() + '-ai', from: 'ai', text: 'Failed to generate tasks. Please try again.' },
-        ]);
-        message.error('Failed to generate tasks!', 1);
-      }
-    } catch (error) {
-      setChatMessages(prev => [
-        ...prev,
-        { id: Date.now() + '-ai', from: 'ai', text: 'Failed to generate tasks. Please try again.' },
-      ]);
+        // nếu backend đã lưu task → thêm vào list ngay
+        if (data.action === 'save' && data.task) {
+            handleAddNewTodo(data.task);
+            message.success('Task đã được tạo!', 1);
+        }
 
-      if (error.response?.status === 401) {
-        message.error('Unauthorized. Please login again.', 1);
-      } else {
-        message.error('Failed to generate AI tasks.', 1);
-      }
+    } catch (e) {
+        setChatMessages(prev => [...prev, {
+            id: Date.now() + '-ai', from: 'ai',
+            text: 'Có lỗi xảy ra. Thử lại nhé!'
+        }]);
     } finally {
-      setIsChatSubmitting(false);
+        setIsChatSubmitting(false);
     }
-  };
+};
+  // const handleSendPrompt = async () => {
+  //   const promptText = promptInput.trim();
+
+  //   if (!promptText) {
+  //     message.error('Please enter a prompt before sending.', 1);
+  //     return;
+  //   }
+
+  //   setIsChatSubmitting(true);
+
+  //   setChatMessages(prev => [...prev, { id: Date.now() + '-user', from: 'user', text: promptText }]);
+
+  //   try {
+  //     const newTasks = await generateTasks({
+  //       source: 'user_prompt',
+  //       prompt: promptText,
+  //       maxTasks: 5, // Default max tasks for chat
+  //     });
+
+  //     if (newTasks && newTasks.length > 0) {
+  //       setChatMessages(prev => [
+  //         ...prev,
+  //         { id: Date.now() + '-ai', from: 'ai', text: `${newTasks.length} task(s) generated and saved successfully.` },
+  //       ]);
+  //       setPromptInput('');
+  //       setIsChatOpen(true);
+
+  //       handleAddGeneratedTodos(newTasks);
+  //       message.success(`${newTasks.length} AI task(s) created successfully!`, 1);
+  //     } else {
+  //       setChatMessages(prev => [
+  //         ...prev,
+  //         { id: Date.now() + '-ai', from: 'ai', text: 'Failed to generate tasks. Please try again.' },
+  //       ]);
+  //       message.error('Failed to generate tasks!', 1);
+  //     }
+  //   } catch (error) {
+  //     setChatMessages(prev => [
+  //       ...prev,
+  //       { id: Date.now() + '-ai', from: 'ai', text: 'Failed to generate tasks. Please try again.' },
+  //     ]);
+
+  //     if (error.response?.status === 401) {
+  //       message.error('Unauthorized. Please login again.', 1);
+  //     } else {
+  //       message.error('Failed to generate AI tasks.', 1);
+  //     }
+  //   } finally {
+  //     setIsChatSubmitting(false);
+  //   }
+  // };
 
   useEffect(() => {
     if (contentRef.current) contentRef.current.style.overflow = openActionRowId ? 'hidden' : 'auto';

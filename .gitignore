@@ -72,3 +72,9 @@ coverage/
 /nlp-service/model/model.safetensors
 /nlp-service/model/tokenizer_config.json
 /phobert-ner-best.zip
+/nlp-service/model/model_v1/vocab.txt
+/nlp-service/model/model_v1/added_tokens.json
+/nlp-service/model/model_v1/bpe.codes
+/nlp-service/model/model_v1/config.json
+/nlp-service/model/model_v1/model.safetensors
+/nlp-service/model/model_v1/tokenizer_config.json
